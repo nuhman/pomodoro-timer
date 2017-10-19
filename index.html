@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pomodoro - Productivity Hack</title>
+  <link href="style.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600|Ravi+Prakash" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+</head>
+<body>
+  <section id="app">
+    <div id="heading">
+      <h1>POMODORO CLOCK <i class="material-icons">&#xE855;</i></h1>
+    </div>
+    <div id="controls">
+
+      <div id="adjust">
+        <p class="adjust-session">
+          Session Length<span>&nbsp;&nbsp;<button @click="sessionInc" class="btn-floating waves-effect waves-light teal" ><i class="material-icons">&#xE316;</i></button></span>&nbsp;&nbsp;{{ session_minutes }} Minutes&nbsp;&nbsp;<span><button @click="sessionDec" class="btn-floating waves-effect waves-light teal"><i class="material-icons">&#xE313;</i></button></span>
+        </p>
+        <p class="adjust-break">
+          Break Length<span>&nbsp;&nbsp;&nbsp;&nbsp;<button @click="breakInc" class="btn-floating waves-effect waves-light teal"><i class="material-icons">&#xE316;</i></button></span>&nbsp;&nbsp;{{ break_minutes}} Minutes&nbsp;&nbsp;<span><button @click="breakDec" class="btn-floating waves-effect waves-light teal"><i class="material-icons">&#xE313;</i></button></span>
+        </p>
+      </div>
+
+
+      <div id="start-stop">
+        <button class="waves-effect waves-light btn" @click="startTimer">Start Timer</button>
+        <button class="waves-effect waves-light btn" @click="pauseTimer">Pause Timer</button>
+      </div>
+    </div>
+    <div id="status">
+
+      <p>
+        This is <span v-bind:class="{ bleedBreak: isBreak }" class="status">{{ status }} </span>time. {{ whatToDo }}.
+      </p>
+    </div>
+    <div id="timer" v-bind:class="{ bleedBreak: isBreak }">
+      <span id="timer-min">
+        {{minutes}}
+      </span> :
+      <span id="timer-sec">
+        {{seconds}}
+      </span>
+    </div>
+    <div id="pbar">
+      <div class="theprogressbar">
+        <div class="theprogress" id="progress"></div>
+      </div>
+    </div>
+<div id="info">
+      <p @click="showInfo = !showInfo">
+        <u>What is the Pomodoro Technique ?</u>
+      </p>
+      <transition name="fade">
+      <template v-if="showInfo" transition="bounce">
+        <p id="infotext">
+          The Pomodoro Technique can help you power through distractions, hyper-focus, and get
+           things done in short bursts, while taking frequent breaks to come up for air and relax.
+           Best of all, it's easy. If you have a busy job where you're expected to produce, it's a
+          great way to get through your tasks.
+          <br />
+          Pomodoro is a cyclical system. You work in short sprints , which makes sure you're consistently
+          productive. You also get to take regular breaks that bolster your motivation and keep you creative.
+        </p>
+      </template>
+    </transition>
+    </div>
+  </section>
+  <footer id="footer">
+    <p>
+      Made with <i class="material-icons love-icon">&#xE87D;</i> by Nuhman
+    </p>
+  </footer>
+
+<script src="vue.js"></script>
+<script src="timer.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
